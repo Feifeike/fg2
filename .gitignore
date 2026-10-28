@@ -1,0 +1,21 @@
+# Python bytecode and local tooling caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Training outputs and TensorBoard event files
+outputs*/
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+events.out.tfevents.*
+runs/
+
+# Local secrets and machine-specific files
+.env
+.env.*
+/config.yaml
+.DS_Store

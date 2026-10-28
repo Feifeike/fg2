@@ -1,0 +1,49 @@
+external:
+  fg2_repository: /path/to/FG2
+  # Leave null to use FG2's official DINOv2 ViT-L/14 download URL.
+  # Otherwise provide the raw DINOv2 ViT-L/14 state dict used by FG2.
+  dinov2_weights: null
+
+data:
+  train_manifest: /path/to/KITTI-360/stage1_train_manifest.json
+  val_manifest: /path/to/KITTI-360/stage1_val_manifest.json
+  test_manifest: /path/to/KITTI-360/stage1_test_manifest.json
+  validation_holdout_drives: [2013_05_28_drive_0009_sync]
+  front_size_hw: [364, 1232]
+  satellite_size_hw: [504, 504]
+  shift_range_m: 20.0
+  rotation_range_deg: 10.0
+
+model:
+  ground_bev_resolution: 41
+  ground_height_resolution: 11
+  satellite_bev_resolution: 41
+  grid_size_h_m: 102.4
+  grid_size_v_m: 25.0
+  temperature: 0.1
+  num_samples_matches: 1024
+
+loss:
+  beta: 1.0
+  grid_size_m: 5.0
+  grid_resolution: 10
+
+training:
+  output_dir: outputs_fg2_kitti360
+  tensorboard_dir: tensorboard
+  batch_size: 8
+  num_workers: 4
+  epochs: 100
+  learning_rate: 1.0e-4
+  weight_decay: 0.0
+  grad_clip_norm: 1.0
+  log_interval: 20
+  seed: 0
+
+evaluation:
+  batch_size: 2
+  num_workers: 2
+  synthetic_perturbation: true
+  seed: 1001
+  test_seed: 2001
+  correspondence_thresholds_m: [1.25, 2.5, 5.0]
